@@ -27,54 +27,15 @@
  
 syntax = "proto3";
 
-package UXDC.Halo;
+package UXDC.Honk;
 
-// Command to clear the complete strip, all LEDs off
-message Clear_Strip
-{
-  bool clr		= 1;							// clr=0 -- nothing happens	clr=1 -- all LEDs off
-}
 
-// Command to set all LEDs to a specific RGB color including global brightness
-message SetColor_Strip
-{
-  uint32 red						= 1;		// 8Bit red value [0,255]
-  uint32 green					= 2;		// 8Bit green value [0,255]
-  uint32 blue						= 3;		// 8Bit blue value [0,255]
-  uint32 globalbrightness	= 4;   	// 8Bit brightness value [0,255]  0=dark
-}
-
-// Command to adjust the total amount of LEDs
-message SetLength_Strip
-{
-  uint32 lenght 	= 1;						// Amount of LEDs to use. Only intended for testing
-}
-
-// Command for animation "Fade In". Fading all LEDs from totally black to target RGB color and brightness. Each increment of brightness can be 
-// delayed with 'delay' in milliseconds which set the total speed of the animation.
-message Cmd_FadeIn
-{
-  uint32 red				= 1;				// 8Bit red value [0,255]
-  uint32 green			= 2;				// 8Bit green value [0,255]
-  uint32 blue				= 3;				// 8Bit blue value [0,255]
-  uint32 brightness	= 4;				// 8Bit brightness value [0,255]  0=dark
-  uint32 delay			= 5;				// Delay in [ms] between each brightness increasement
-}
-// Command for animation "Fade Out". Starting from the actual brightness and color, begins to fade all LEDs untill all are off. Each decrement of brightness 
-// can be delayed with 'delay' in milliseconds which set the total speed of the animation.
-message Cmd_FadeOut
-{
-  uint32 red			= 1;					// 8Bit red value [0,255]
-  uint32 green		= 2;					// 8Bit green value [0,255]
-  uint32 blue			= 3;					// 8Bit blue value [0,255]
-  uint32 delay		= 4;					// Delay in [ms] between each brightness decreasement
-}
 
 
 
 // Status message of application. Gives some feedback of what the application is doing and if there are any problems. This message will be send
 // periodically (typical 2 times a second)
-message HALO_Status
+message HONK_Status
 {
   uint32 alive_counter = 1;				// Unsigned 16Bit integer rolling counter. Will be incremented each new status message. 
 }
@@ -86,14 +47,7 @@ message SetEvent
   enum EventCommandList
   {
 	NONE 				= 0;
-    FADE_IN 			= 1;  				// Trigger Fade In Animation with fixed settings for use case scenario (here: white with max brightness, speed fixed)
-    FADE_OUT 			= 2; 				// Trigger Fade Out Animation with fixed settings for use case scenario (here: turn to black, speed fixed)
-    IDLE_OFF 			= 3; 				// Trigger to turn off illumination instantly (hard off)
-    ANIM_01				= 4;				// Play animation on Halo 'Alicia Welocme'
-    ANIM_02				= 5;				// Play animation on Halo 'Alicia Bye'
-    ANIM_03				= 6;				// Play animation on Halo 'Warning Child Left Behind'
-    ANIM_04				= 7;				// Play animation on Halo 'Andrew Welcome'
-    ANIM_05				= 8;				// Play animation on Halo 'Andrew Bye'
+
   }
 
   EventCommandList sendevent = 1;				// 'sendevent' with one of the events in the list 'EventCommandList'
