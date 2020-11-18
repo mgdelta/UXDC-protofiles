@@ -37,7 +37,8 @@ package UXDC.Honk;
 // periodically (typical 2 times a second)
 message HONK_Status
 {
-  uint32 alive_counter = 1;				// Unsigned 16Bit integer rolling counter. Will be incremented each new status message. 
+  uint32 	alive_counter 			= 1;				// Unsigned 16Bit integer rolling counter. Will be incremented each new status message. 
+  bool 		hazard_blinker_active 	= 2;
 }
 
 
@@ -46,7 +47,8 @@ message SetEvent
 {
   enum EventCommandList
   {
-	NONE 				= 0;
+	NONE 					= 0;
+	TOGGLE_HAZARD_BLINKER 	= 1;
 
   }
 
