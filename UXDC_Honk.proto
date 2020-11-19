@@ -57,6 +57,9 @@ message SetEvent
   {
 	NONE 					= 0;
 	TOGGLE_HAZARD_BLINKER 	= 1;
+	SET_HONK_VW_MODE		= 2;
+	SET_HONK_UXDC_MODE		= 3;
+	HORN_WARNING_CHILD		= 4;
 
   }
 
